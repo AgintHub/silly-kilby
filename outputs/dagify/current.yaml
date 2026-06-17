@@ -1,0 +1,65 @@
+name: test_workflow
+dag_type: plain_text
+description: An execution plan to test the given objective.
+nodes:
+  define_test_objective:
+    name: define_test_objective
+    nodes_depended_on: []
+    nodes_dependent_on: []
+    prompt: Describe the specific objective for testing in one or two sentences.
+    description: Clearly articulate what needs to be tested.
+    agent: false
+  break_down_test_objective:
+    name: break_down_test_objective
+    nodes_depended_on:
+    - define_test_objective
+    nodes_dependent_on: []
+    prompt: List specific aspects or components that make up the test objective, e.g.,
+      specific functions, scenarios, or requirements.
+    description: Decompose the test objective into its fundamental parts.
+    agent: false
+  develop_test_plan:
+    name: develop_test_plan
+    nodes_depended_on:
+    - break_down_test_objective
+    nodes_dependent_on: []
+    prompt: Describe the detailed test plan for each component, including test cases,
+      data, and expected results.
+    description: Create a comprehensive test plan for each component.
+    agent: false
+  execute_test_cases:
+    name: execute_test_cases
+    nodes_depended_on:
+    - develop_test_plan
+    nodes_dependent_on: []
+    prompt: Execute each test case as described in the test plan and report the outcome
+      (pass/fail) for each test case.
+    description: Run the test cases to validate the test plan.
+    agent: false
+  analyze_test_results:
+    name: analyze_test_results
+    nodes_depended_on:
+    - execute_test_cases
+    nodes_dependent_on: []
+    prompt: Evaluate the results of the test execution, identifying any failures or
+      issues and highlighting successful outcomes.
+    description: Assess the overall outcome of the test execution.
+    agent: false
+  refine_test_objective:
+    name: refine_test_objective
+    nodes_depended_on:
+    - analyze_test_results
+    nodes_dependent_on: []
+    prompt: Revising the original objective and adjusting it to take into account
+      the insights gained from the test execution.
+    description: Update the test objective based on the results and lessons learned.
+    agent: false
+  generate_test_report:
+    name: generate_test_report
+    nodes_depended_on:
+    - analyze_test_results
+    nodes_dependent_on: []
+    prompt: Prepare a detailed report summarizing the test execution, test results,
+      and lessons learned.
+    description: Document the test execution and results in a comprehensive report.
+    agent: false
